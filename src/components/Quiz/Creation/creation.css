@@ -1,0 +1,11 @@
+#tab .ant-input {
+    width: 20vw;
+}
+
+#input {
+  justify-content: start;
+}
+
+#addChoice  {
+  background-color: aliceblue;
+}
