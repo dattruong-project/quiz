@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import Question from './Question'
 import QuizHeader from './QuizHeader'
 import { AppLogo, Next, CheckIcon, TimerIcon } from '../../../config/icons'
-import { useQuiz } from '../../../context/QuizContext'
 import { useTimer } from '../../../hooks'
 import { device } from '../../../styles/BreakPoints'
 import { PageCenter } from '../../../styles/Global'
 import { ScreenTypes } from '../../../types'
 import Button from '../../ui/Button'
 import ModalWrapper from '../../ui/ModalWrapper'
+import { useTopic } from '../../../context/topic/TopicContext'
 
 const QuizContainer = styled.div<{ selectedAnswer: boolean }>`
   width: 900px;
@@ -68,15 +68,16 @@ const QuestionScreen: FC = () => {
   const [showResultModal, setShowResultModal] = useState<boolean>(false)
 
   const {
-    questions,
-    quizDetails,
+    selectedTopicDetails,
     result,
     setResult,
     setCurrentScreen,
     timer,
     setTimer,
     setEndTime,
-  } = useQuiz()
+  } = useTopic()
+
+  const questions = selectedTopicDetails.questions;
 
   const currentQuestion = questions[activeQuestion]
 
@@ -94,7 +95,7 @@ const QuestionScreen: FC = () => {
       setActiveQuestion((prev) => prev + 1)
     } else {
       // how long does it take to finish the quiz
-      const timeTaken = quizDetails.totalTime - timer
+      const timeTaken = selectedTopicDetails.totalTime - timer
       setEndTime(timeTaken)
       setShowResultModal(true)
     }
@@ -134,7 +135,7 @@ const QuestionScreen: FC = () => {
   }, [showTimerModal, showResultModal])
 
   // timer hooks, handle conditions related to time
-  useTimer(timer, quizDetails, setEndTime, setTimer, setShowTimerModal, showResultModal)
+  useTimer(timer, selectedTopicDetails, setEndTime, setTimer, setShowTimerModal, showResultModal)
 
   return (
     <PageCenter>
@@ -144,7 +145,7 @@ const QuestionScreen: FC = () => {
       <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
         <QuizHeader
           activeQuestion={activeQuestion}
-          totalQuestions={quizDetails.totalQuestions}
+          totalQuestions={selectedTopicDetails.totalQuestions}
           timer={timer}
         />
         <Question

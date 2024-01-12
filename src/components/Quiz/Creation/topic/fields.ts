@@ -1,6 +1,5 @@
 import { DictionaryComponentType, FormFields } from "dynamic-builder-form";
-import { titleId, levelId, totalScoreId, totalQuestionsId, totalTimeId } from "../constants";
-
+import { topicId, levelId, totalScoreId, totalQuestionsId, totalTimeId } from "../constants";
 
 const defaultLevel = [
     {
@@ -14,8 +13,8 @@ const defaultLevel = [
 ]
 
 export const TopicFields: FormFields = {
-    [titleId]: {
-        id: titleId,
+    [topicId]: {
+        id: topicId,
         meta: {
             placeholder: "Please Input your Topic",
         },

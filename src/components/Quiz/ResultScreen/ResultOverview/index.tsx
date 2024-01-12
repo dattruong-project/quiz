@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 
-import { useQuiz } from '../../../../context/QuizContext'
 import { device } from '../../../../styles/BreakPoints'
 import { HighlightedText } from '../../../../styles/Global'
 import { convertSeconds } from '../../../../utils/helpers'
-import { Result } from '../../../../types'
+import { Result } from '../../../../data/QuizQuestions'
+import { useTopic } from '../../../../context/topic/TopicContext'
 
 const ResultOverviewStyle = styled.div`
   text-align: center;
@@ -25,7 +25,7 @@ interface ResultOverviewProps {
 }
 
 const ResultOverview: FC<ResultOverviewProps> = ({ result }) => {
-  const { quizDetails, endTime } = useQuiz()
+  const { selectedTopicDetails, endTime } = useTopic()
 
   const totalQuestionAttempted = result.length
 
@@ -35,18 +35,18 @@ const ResultOverview: FC<ResultOverviewProps> = ({ result }) => {
 
   // Passed if 60 or more than 60% marks
   const calculateStatus =
-    (obtainedScore / quizDetails.totalScore) * 100 >= 60 ? 'Passed' : 'Failed'
+    (obtainedScore / selectedTopicDetails.totalScore) * 100 >= 60 ? 'Passed' : 'Failed'
 
   return (
     <ResultOverviewStyle>
       <p>
         You attempted questions:{' '}
         <HighlightedText> {totalQuestionAttempted} </HighlightedText>/{' '}
-        {quizDetails.totalQuestions}
+        {selectedTopicDetails.totalQuestions}
       </p>
       <p>
         Score secured:<HighlightedText> {obtainedScore} </HighlightedText>/{' '}
-        {quizDetails.totalScore}
+        {selectedTopicDetails.totalScore}
       </p>
       <p>
         Time Spent:<HighlightedText> {convertSeconds(endTime)} </HighlightedText>

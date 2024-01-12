@@ -7,5 +7,5 @@ export const questionSchema: FormSchema = {
     sessions: {
         [quizSessionId]: QuizSessions
     },
-    sessionsById: [quizSessionId]  
+    sessionsById: [quizSessionId],
 }

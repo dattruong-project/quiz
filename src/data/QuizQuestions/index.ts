@@ -13,6 +13,11 @@ type Choice = string
 type CorrectAnswers = string[]
 export type QuestionType = 'MCQs' | 'MAQs' | 'boolean'
 
+export interface Result extends Question {
+  selectedAnswer: string[]
+  isMatch: boolean
+}
+
 export type Question = {
   question: string
   choices: Choice[]

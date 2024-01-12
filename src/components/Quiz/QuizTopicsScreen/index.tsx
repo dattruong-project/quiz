@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { AppLogo } from '../../../config/icons'
-import { useQuiz } from '../../../context/QuizContext'
 import { device } from '../../../styles/BreakPoints'
 import { PageCenter, CenterCardContainer, LogoContainer, HighlightedText } from '../../../styles/Global'
 import { ScreenTypes } from '../../../types'
 import Button from '../../ui/Button'
+import { useTopic } from '../../../context/topic/TopicContext'
+import { ReactComponent as Moon } from '../../../assets/icons/moon.svg'
 
 const Heading = styled.h2`
   font-size: 32px;
@@ -71,36 +72,35 @@ const SelectButtonText = styled.span`
 `
 
 const QuizTopicsScreen: React.FC = () => {
-  const { quizTopic, selectQuizTopic, setCurrentScreen, getQuizCategory } = useQuiz()
+  const { setCurrentScreen,topics, quizTopic, selectTopic, selectedTopicDetails } = useTopic()
    
-  console.log(quizTopic);
   const goToQuizDetailsScreen = () => {
-    setCurrentScreen(ScreenTypes.QuizDetailsScreen)
+    if (selectedTopicDetails.questions) {
+     setCurrentScreen(ScreenTypes.QuizDetailsScreen)
+    }
   }
 
   return (
     <PageCenter light justifyCenter>
       <CenterCardContainer>
         <LogoContainer>
-          <AppLogo />
+          {/* <AppLogo /> */}
         </LogoContainer>
         <Heading>
-          WELCOME TO <HighlightedText> XEVEN QUIZ</HighlightedText>
+          WELCOME TO <HighlightedText> LoreSumip</HighlightedText>
         </Heading>
         <DetailText>Select topic below to start your Quiz.</DetailText>
 
         <SelectButtonContainer>
-          {getQuizCategory()?.map(({ title, icon, disabled }) => (
-            <SelectButton
-              key={title}
-              active={quizTopic === title}
-              onClick={() => !disabled && selectQuizTopic(title)}
-              disabled={disabled}
-            >
-              {icon}
-              <SelectButtonText>{title}</SelectButtonText>
-            </SelectButton>
-          ))}
+        {Object.values(topics).map(({ topic }) => (
+        <SelectButton
+          key={topic}
+          active={quizTopic === topic}
+          onClick={() => selectTopic(topic)}>
+          <Moon/>
+          <SelectButtonText>{topic}</SelectButtonText>
+        </SelectButton>
+      ))}
         </SelectButtonContainer>
         <Button text="Continue" onClick={goToQuizDetailsScreen} bold />
       </CenterCardContainer>

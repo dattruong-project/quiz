@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { AppLogo, StartIcon } from '../../../config/icons'
-import { useQuiz } from '../../../context/QuizContext'
 import { PageCenter, CenterCardContainer, LogoContainer, HighlightedText } from '../../../styles/Global'
 import { ScreenTypes } from '../../../types'
 import { convertSeconds } from '../../../utils/helpers'
 import Button from '../../ui/Button'
+import { useTopic } from '../../../context/topic/TopicContext'
 
 const AppTitle = styled.h2`
   font-weight: 700;
@@ -29,9 +29,9 @@ const DetailText = styled.p`
 `
 
 const QuizDetailsScreen = () => {
-  const { setCurrentScreen, quizDetails } = useQuiz()
+  const { setCurrentScreen, selectedTopicDetails } = useTopic()
 
-  const { selectedQuizTopic, totalQuestions, totalScore, totalTime } = quizDetails
+  const { totalQuestions, totalScore, totalTime } = selectedTopicDetails
 
   const goToQuestionScreen = () => {
     setCurrentScreen(ScreenTypes.QuestionScreen)
@@ -41,13 +41,10 @@ const QuizDetailsScreen = () => {
     <PageCenter light justifyCenter>
       <CenterCardContainer>
         <LogoContainer>
-          <AppLogo />
+          {/* <AppLogo /> */}
         </LogoContainer>
-        <AppTitle>XEVEN QUIZ</AppTitle>
+        {/* <AppTitle>XEVEN QUIZ</AppTitle> */}
         <DetailTextContainer>
-          <DetailText>
-            Selected Quiz Topic: <HighlightedText>{selectedQuizTopic}</HighlightedText>
-          </DetailText>
           <DetailText>
             Total questions to attempt:{' '}
             <HighlightedText>{totalQuestions}</HighlightedText>

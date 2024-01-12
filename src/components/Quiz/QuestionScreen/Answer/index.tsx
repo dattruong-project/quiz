@@ -2,7 +2,6 @@ import { FC } from 'react'
 import styled, { css } from 'styled-components'
 import { device } from '../../../../styles/BreakPoints'
 
-
 const AnswerStyle = styled.div<{ highlightAnswer: boolean }>`
   font-size: clamp(18px, 4vw, 16px);
   color: ${({ theme }) => theme.colors.secondaryText};

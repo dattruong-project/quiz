@@ -1,62 +1,52 @@
 
 import MainLayout from "../../Dashboard/layout";
-import { python } from "../../../data/QuizQuestions/python";
-import { QuestionType, Topic } from "../../../data/QuizQuestions";
-import { QuizTopic } from "../../../data/quizTopics";
+import { QuestionType } from "../../../data/QuizQuestions";
 import { Dictionary, FormsProvider, MasterForm, SelectComponent, dictionary } from "dynamic-builder-form";
 import { useState } from "react";
 import "./creation.css";
-import { Tabs, TabsProps } from "antd";
+import { Button, Tabs, TabsProps } from "antd";
 import { topicSchema } from "./topic/schema";
 import { questionSchema } from "./question/schema";
 import { quizDictionary } from "../../../dictionary";
 import ChoiceComponent from "./component/choice";
 import { UseFormReturn } from "dynamic-builder-form/dist/form-controller";
-
-const quiz: Record<string, Topic> = {
-  Python: python
-}
-
-const category: QuizTopic = {
-  title: "Python",
-  icon: undefined
-}
+import { useQuestion } from "../../../context/question/QuestionContext";
+import { useTopic } from "../../../context/topic/TopicContext";
 
 const topicForm = "topicForm";
 const questionForm = "questionForm";
 
 const QuizCreation = () => {
   const [questionType, setQuestionType] = useState<QuestionType>("MAQs");
+  const { questions, addQuestion, onSubmit } = useQuestion();
+  const topicContext = useTopic();
 
   const questionDictionary: Dictionary = {
     ...quizDictionary,
     select: (props) => (
       <SelectComponent  {...props} onSelect={setQuestionType} />
     ),
-    "question-created": (props) => (
-      <ChoiceComponent  {...props} questionType={questionType} />
+    "question-created": () => (
+      <ChoiceComponent questionType={questionType} />
     ),
   }
 
-  const topicTab = <MasterForm formId={topicForm} schema={topicSchema} onSubmit={(values) => {
-    console.log(values);
-  }} dictionary={dictionary} />
+  const onSubmitTopic = (values: any) => topicContext.addTopic(values);
 
-  const questionTab = <MasterForm defaultValues={async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          code: "123"
-        });
-      }, 3000);
-    });
-  }} componentDidMount={(context: UseFormReturn) => {
-    const {formState} = context;
-    const {isLoading} = formState;
-    console.log(isLoading);
-  }} formId={questionForm} schema={questionSchema} onSubmit={(values) => {
-   console.log(values)
-  }} dictionary={questionDictionary} />
+  const topicTab = <MasterForm formId={topicForm} schema={topicSchema} onSubmit={onSubmitTopic} dictionary={dictionary} />
+
+  const questionTab = <>
+    <div>
+      <Button onClick={addQuestion}>+</Button>
+    </div>
+    {questions.map((question, index) => <MasterForm componentDidMount={(context: UseFormReturn) => question.context = context}
+      onSubmit={() => {
+
+      }} formId={index.toString()} schema={questionSchema} dictionary={questionDictionary} />)}
+    <div>
+      <Button onClick={onSubmit}>Submit</Button>
+    </div>
+  </>
 
   const items: TabsProps['items'] = [
     {

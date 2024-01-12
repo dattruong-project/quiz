@@ -2,7 +2,6 @@ import { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AppLogo, Refresh } from '../../../config/icons'
-import { useQuiz } from '../../../context/QuizContext'
 import { device } from '../../../styles/BreakPoints'
 import { Flex, LogoContainer, ResizableBox } from '../../../styles/Global'
 import { refreshPage } from '../../../utils/helpers'
@@ -11,6 +10,7 @@ import CodeSnippet from '../../ui/CodeSnippet'
 import QuizImage from '../../ui/QuizImage'
 import ResultOverview from './ResultOverview'
 import RightAnswer from './RightAnswer'
+import { useTopic } from '../../../context/topic/TopicContext'
 
 const ResultScreenContainer = styled.div`
   max-width: 900px;
@@ -118,7 +118,7 @@ const Score = styled.span<{ right: boolean }>`
 `
 
 const ResultScreen: FC = () => {
-  const { result } = useQuiz()
+  const { result } = useTopic()
 
   const onClickRetry = () => {
     refreshPage()
@@ -127,7 +127,7 @@ const ResultScreen: FC = () => {
   return (
     <ResultScreenContainer>
       <LogoContainer>
-        <AppLogo />
+        {/* <AppLogo /> */}
       </LogoContainer>
       <InnerContainer>
         <ResultOverview result={result} />

@@ -3,14 +3,14 @@ import Button from "./components/ui/Button";
 import TextArea from "antd/es/input/TextArea";
 
 export const quizDictionary: Dictionary = {
-   ...dictionary,
-   input: ({ ...props }) => (
-         <InputComponent {...props} style={{ fontFamily: 'Anek Malayalam' }}/>
-   ),
-   submit: ({ ...props }) => (
-         <Button outline text={props.label} {...props} />
-   ),
-   area: ({ disabledField, ...rest}) => (
-      <TextArea  style={{ fontFamily: 'Anek Malayalam' }} rows={rest.rows} {...rest}/>
-  )
+      ...dictionary,
+      input: ({ ...props }) => (
+            <InputComponent {...props} style={{ fontFamily: 'Anek Malayalam' }} />
+      ),
+      submit: ({ ...props }) => (
+            <Button outline text={props.label} {...props} />
+      ),
+      area: ({ disabledField, isValidating, propRef, ...rest }) => (
+            <TextArea {...rest} disabled={disabledField} style={{ fontFamily: 'Anek Malayalam' }} rows={rest.rows} />
+      )
 }

@@ -7,7 +7,7 @@ import { Topic } from '.'
 
 export const javascript: Topic = {
   topic: 'Javascript',
-  level: 'Beginner',
+  level: 'advanced',
   totalQuestions: 14,
   totalScore: 125,
   totalTime: 240,

@@ -1,25 +1,22 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QuestionType } from "../../../../../data/QuizQuestions";
-import { Checkbox, Input, Button, Row, Col } from "antd";
+import { Checkbox, Input, Button, Col } from "antd";
 import { FileAddTwoTone } from '@ant-design/icons';
-import { FormBuilderProps } from "dynamic-builder-form/dist/form-builder/formBuilder";
-import { FieldValues, UseFormSetValue } from "dynamic-builder-form/dist/form-controller";
+import { useFormContext } from "dynamic-builder-form";
+import { answerId, choicesId } from "../../question/fields";
 
 type ChoiceComponentProps = {
-    questionType: QuestionType;
-    onChange: (value: any) => void;
-    setValue: UseFormSetValue<FieldValues>;
+    questionType: QuestionType
 };
 
-type ChoiceType = ChoiceComponentProps & FormBuilderProps;
-
 interface Answer {
-  selectedAns: any;
-  value: string;
+    selectedAns: any;
+    value: string;
 }
 
-const ChoiceComponent: FC<ChoiceType> = ({ questionType, onChange, setValue }) => {
-   
+const ChoiceComponent: FC<ChoiceComponentProps> = ({ questionType }) => {
+    const context = useFormContext();
+
     const [answers, setAnswers] = useState<Answer[]>(
         questionType === "boolean" ? [
             { value: "", selectedAns: true },
@@ -33,7 +30,7 @@ const ChoiceComponent: FC<ChoiceType> = ({ questionType, onChange, setValue }) =
     );
 
     const [selectedAns, setSelectedAns] = useState<string[]>([]);
-    
+
     useEffect(() => {
         setSelectedAns([]);
     }, [questionType]);
@@ -53,27 +50,24 @@ const ChoiceComponent: FC<ChoiceType> = ({ questionType, onChange, setValue }) =
     // };
 
     const handleChange = (value: any) => {
-        setSelectedAns(value);
-        console.log(value);
-        onChange(value);
+       setSelectedAns(value);
+       context.setValue(answerId,value);
+       const answerLs: string[] = answers.map(answer => answer.value);
+       context.setValue(choicesId,answerLs);
     };
 
     const renderChoices = () => {
         return answers.map((item, index) => (
-            <Row style={{ display: "flex", alignItems: "center", marginBottom: 8 }} key={index}>
-                    <Checkbox.Group value={selectedAns} onChange={handleChange}>
-                        <Col>
-                            <Checkbox value={item} />
-                        </Col>
-                        <Input
-                            placeholder={`Enter ${index + 1} details`}
-                            onChange={(e) => {item.value = e.target.value}}
-                        />   
-                    </Checkbox.Group>
-                {/* <Col span={4}>
-                    <Button onClick={() => removeChoice(index)} icon={<DeleteTwoTone />} style={{ marginLeft: 8 }} />
-                </Col> */}
-            </Row>
+            <Checkbox.Group value={selectedAns} onChange={handleChange} key={index}>
+                <Col>
+                    <Checkbox value={item.selectedAns} />
+                </Col>
+                <Input
+                    placeholder={`Enter ${index + 1} details`}
+                    onChange={(e) => { item.value = e.target.value }}
+                    key={index}
+                />
+            </Checkbox.Group>
         ));
     };
 

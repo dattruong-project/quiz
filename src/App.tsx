@@ -7,7 +7,7 @@ import { themes } from './styles/Theme'
 import { Layout } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Main from './route'
-import QuizProvider from './context/QuizProvider'
+import QuizProvider from './context/topic/TopicProvider'
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState(() => {

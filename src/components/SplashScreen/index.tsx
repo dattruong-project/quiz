@@ -51,7 +51,7 @@ const SplashScreen = () => {
   return (
     <PageCenter justifyCenter>
       <LogoAnimation logoSize={logoSize}>
-        <AppLogo />
+        {/* <AppLogo /> */}
       </LogoAnimation>
     </PageCenter>
   )

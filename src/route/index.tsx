@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import { LoginScreen } from '../components/LoginScreen';
-import QuizScreen from '../components/Quiz/Creation';
 import SplashScreen from '../components/SplashScreen';
-import QuizTopicsScreen from '../components/Quiz/QuizTopicsScreen';
-import MainLayout from '../components/Dashboard/layout';
-import QuizProvider from '../context/QuizProvider';
 import QuizCreation from '../components/Quiz/Creation';
+import QuestionProvider from '../context/question/QuestionProvider';
+import QuizTopicsScreen from '../components/Quiz/QuizTopicsScreen';
+import MainQuiz from '../components/Quiz';
+import MainLayout from '../components/Dashboard/layout';
 
 export const defaultRoute = '/';
 export const loginRoute = 'login';
@@ -20,11 +20,13 @@ const Main = () => {
             <Route path={defaultRoute} element={<SplashScreen />} />
             <Route path={loginRoute} element={<LoginScreen />} />
             <Route path={dashboardRoute}>
-                <Route index element={< QuizCreation/>}></Route>
+                <Route index element={<QuestionProvider>
+                    < QuizCreation />
+                </QuestionProvider>}></Route>
                 <Route path={quizCreationRoute} element={<>
-                    <MainLayout>
-                            <QuizTopicsScreen></QuizTopicsScreen>
-                    </MainLayout>
+                   <MainLayout>
+                   <MainQuiz></MainQuiz>
+                   </MainLayout>
                 </>}>
                 </Route>
             </Route>
