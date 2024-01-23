@@ -5,7 +5,6 @@ import { device } from '../../../../styles/BreakPoints'
 import CodeSnippet from '../../../ui/CodeSnippet'
 import QuizImage from '../../../ui/QuizImage'
 
-
 const QuestionContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 40px;

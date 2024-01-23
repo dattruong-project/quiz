@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Question from './Question'
 import QuizHeader from './QuizHeader'
-import { AppLogo, Next, CheckIcon, TimerIcon } from '../../../config/icons'
+import { Next, CheckIcon, TimerIcon } from '../../../config/icons'
 import { useTimer } from '../../../hooks'
 import { device } from '../../../styles/BreakPoints'
 import { PageCenter } from '../../../styles/Global'
@@ -139,9 +139,6 @@ const QuestionScreen: FC = () => {
 
   return (
     <PageCenter>
-      <LogoContainer>
-        <AppLogo />
-      </LogoContainer>
       <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
         <QuizHeader
           activeQuestion={activeQuestion}

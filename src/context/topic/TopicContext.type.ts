@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 import { Topic, Question, Result } from "../../data/QuizQuestions"
 import { ScreenTypes } from "../../types"
+import { QuizTab } from "../../components/Quiz/Creation"
 
 export type TopicContextTypes = {
     currentScreen: ScreenTypes
@@ -17,5 +18,7 @@ export type TopicContextTypes = {
     selectedTopicDetails: Topic,
     addTopic: (newTopic: Topic) => void,
     addQuestionToTopic : (topic: string, questions: Question[]) => void,
-    currentAddedTopic: string;
+    currentAddedTopic: any;
+    setQuizTab: (tab: QuizTab) => void;
+    quizTab: string
   }

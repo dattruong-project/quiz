@@ -1,8 +1,10 @@
+import { ValidateRule } from "dynamic-builder-form"
+
 export const usernameValidation = {
     usernameRequired: {
         value: true,
         message: "Username Required",
-        key: "required",
+        key: ValidateRule.required,
     },
 }
 
@@ -10,6 +12,6 @@ export const passwordValidation = {
     passwordRequired: {
         value: true,
         message: 'Password Required',
-        key: "required",
+        key: ValidateRule.required,
     },
 }

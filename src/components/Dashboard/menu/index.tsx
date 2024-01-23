@@ -1,20 +1,23 @@
 import React from 'react';
 import {
-    DesktopOutlined,
-    PieChartOutlined,
+    DesktopOutlined
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { dashboardRoute } from '../../../route';
 
-const items = [
-    { label: 'home', key: "quiz", icon: <PieChartOutlined />, to: "/dashboard"},
-    { label: 'quiz', key: "creation", icon: <DesktopOutlined />, to: "/dashboard/quiz-creation"}
-];
+//TODO: Change this icon
+// TODO: Tab Home for creating question
 
 const MenuPage: React.FC = () => {
+    const items = [
+        // { label: "home", key: "home", icon: <PieChartOutlined />, to: "/dashboard"},
+        { label: "quiz", key: "quiz", icon: <DesktopOutlined />, to: `/${dashboardRoute}`}
+    ];
+    
     return (
             <Menu style={{
-                height: '100%',
+                height: "100%",
               }} mode="inline" defaultSelectedKeys={[items[0].key]}>
                 {items.map((item) => (
                     <Menu.Item key={item.key} icon={item.icon}>

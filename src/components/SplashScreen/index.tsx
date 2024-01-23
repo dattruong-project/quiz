@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-import { AppLogo } from '../../config/icons'
 import { PageCenter } from '../../styles/Global'
 import { useNavigate } from 'react-router-dom'
 import { loginRoute } from '../../route'
@@ -48,6 +46,9 @@ const SplashScreen = () => {
       navigate(loginRoute);
     },1000)
   })
+
+  //TODO: App Logo
+  
   return (
     <PageCenter justifyCenter>
       <LogoAnimation logoSize={logoSize}>

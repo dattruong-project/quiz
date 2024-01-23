@@ -26,6 +26,12 @@ const QuestionProvider = ({ children }: QuestionProps) => {
         setQuestion(newQuestion);
     };
 
+    const generateQuestion = () => {
+        const {totalQuestions,totalScore} = currentAddedTopic;
+        const newQuestions = Array.from({ length: totalQuestions }, () => ({ ...questionDefault,...{score: totalScore / totalQuestions} }));
+        setQuestion((prevQuestions) => [...prevQuestions, ...newQuestions]);
+    }
+
     const removeQuestion = (index: number) => {
         const updatedQuestions = [...questions];
         updatedQuestions.splice(index, 1);
@@ -47,15 +53,16 @@ const QuestionProvider = ({ children }: QuestionProps) => {
                 }
             }
         });
-
-        addQuestionToTopic(currentAddedTopic,questions);
+        const {topic} = currentAddedTopic;
+        addQuestionToTopic(topic,questions);
     }
 
     const questionContextValue: QuestionContextTypes = {
         questions: questions,
         addQuestion,
         removeQuestion,
-        onSubmit
+        onSubmit,
+        generateQuestion
     }
 
     return <>

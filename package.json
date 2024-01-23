@@ -13,7 +13,7 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "antd": "^5.12.7",
-    "dynamic-builder-form": "^0.1.8",
+    "dynamic-builder-form": "^0.1.10-beta",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

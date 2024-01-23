@@ -4,7 +4,6 @@
 // 3. MAQs | Multiple Answers | multiple
 
 import { Topic } from '.'
-import CodeSnippet1 from '../../assets/images/code-snippet-1.png'
 
 export const react: Topic = {
   topic: 'React',

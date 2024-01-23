@@ -7,10 +7,10 @@ import { Topic } from '.'
 
 export const python: Topic = {
   topic: 'Python',
-  level: 'Advanced',
+  level: 'Basic',
   totalQuestions: 14,
   totalScore: 125,
-  totalTime: 360,
+  totalTime: 120,
   questions: [
     {
       question:

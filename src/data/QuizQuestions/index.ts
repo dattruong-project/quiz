@@ -1,6 +1,3 @@
-import { ReactNode } from 'react'
-import { generalKnowledge } from './generalKnowledge'
-import { javascript } from './javascript'
 import { python } from './python'
 import { react } from './react'
 
@@ -39,6 +36,5 @@ export type Topic = {
 
 export const quiz: Record<string, Topic> = {
   React: react,
-  Python: python,
-  'General Knowledge': generalKnowledge,
+  Python: python
 }

@@ -8,7 +8,7 @@ export const quizDictionary: Dictionary = {
             <InputComponent {...props} style={{ fontFamily: 'Anek Malayalam' }} />
       ),
       submit: ({ ...props }) => (
-            <Button outline text={props.label} {...props} />
+            <Button {...props} outline text={props.label}  />
       ),
       area: ({ disabledField, isValidating, propRef, ...rest }) => (
             <TextArea {...rest} disabled={disabledField} style={{ fontFamily: 'Anek Malayalam' }} rows={rest.rows} />

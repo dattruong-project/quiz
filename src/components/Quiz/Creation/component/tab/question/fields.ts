@@ -2,13 +2,13 @@ import { DictionaryComponentType, FormFields } from "dynamic-builder-form";
 
 export const questionId = "question";
 export const codeId = "code";
-export const typeId = "types";
+export const choicesId = "choices";
+export const typeId = "type";
 export const correctAnswerId = "correctAnswer";
 export const addChoiceBtnId = "addChoice";
 export const scoreId = "score";
-export const answerId = "correctAnswers";
+export const answerId = "answers";
 export const questionCardId = "questions";
-export const choicesId = "choices";
 
 export const QuestionLs = [{
     label: "Multiple choice",
@@ -37,8 +37,8 @@ export const QuestionFields: FormFields = {
         },
         type: "area",
     },
-    [typeId]: {
-        id: typeId,
+    [choicesId]: {
+        id: choicesId,
         data: QuestionLs,
         meta: {
             placeholder: "Please Select your choice",

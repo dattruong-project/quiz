@@ -12,19 +12,21 @@ export const initialState: TopicContextTypes = {
   endTime: 0,
   setEndTime: () => { },
   quizTopic: '',
-  selectTopic: () => {},
+  selectTopic: () => { },
   selectedTopicDetails: {
-    topic: 'React',
+    topic: "Python",
     level: 'Basic',
     totalQuestions: 0,
     totalScore: 0,
     totalTime: 0,
     questions: []
   },
-  addTopic: () => {},
-  addQuestionToTopic: () => {},
+  addTopic: () => { },
+  addQuestionToTopic: () => { },
   topics: {},
-  currentAddedTopic: ""
+  currentAddedTopic: "",
+  setQuizTab: () => {},
+  quizTab: ""
 }
 
 export const TopicContext = createContext<TopicContextTypes>(initialState)

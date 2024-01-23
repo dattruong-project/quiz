@@ -4,6 +4,7 @@ import { quizDictionary } from "../../dictionary";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { device } from "../../styles/BreakPoints";
+import { dashboardRoute } from "../../route";
 
 export const loginFormId = "loginForm";
 
@@ -21,19 +22,12 @@ const LoginStyle = styled.div`
     #username, #password {
       flex-direction: column;
       display: flex;
-    }
-
-    #submit-field {
-        background-color: red;
-    }
-               
+    }          
 `
 export const LoginForm = () => {
     const navigate = useNavigate();
 
-    const onSubmit = async () => {
-        navigate("/dashboard");
-    };
+    const onSubmit = () => navigate(`/${dashboardRoute}`);
 
     return <LoginStyle>
         <MasterForm formId={loginFormId} schema={loginSchema} dictionary={quizDictionary}

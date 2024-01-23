@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
-
 import ToggleTheme from './components/ui/ToggleTheme'
 import { GlobalStyles } from './styles/Global'
 import { themes } from './styles/Theme'

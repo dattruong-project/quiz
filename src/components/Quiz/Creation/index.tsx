@@ -1,70 +1,38 @@
 
 import MainLayout from "../../Dashboard/layout";
-import { QuestionType } from "../../../data/QuizQuestions";
-import { Dictionary, FormsProvider, MasterForm, SelectComponent, dictionary } from "dynamic-builder-form";
-import { useState } from "react";
+import { FormsProvider } from "dynamic-builder-form";
 import "./creation.css";
-import { Button, Tabs, TabsProps } from "antd";
-import { topicSchema } from "./topic/schema";
-import { questionSchema } from "./question/schema";
-import { quizDictionary } from "../../../dictionary";
-import ChoiceComponent from "./component/choice";
-import { UseFormReturn } from "dynamic-builder-form/dist/form-controller";
-import { useQuestion } from "../../../context/question/QuestionContext";
+import { Tabs, TabsProps } from "antd";
+import TopicTab from "./component/tab/topic";
 import { useTopic } from "../../../context/topic/TopicContext";
 
-const topicForm = "topicForm";
-const questionForm = "questionForm";
+export enum QuizTab {
+  TopicTab = "topic",
+  QuestionTab = "question"
+}
 
 const QuizCreation = () => {
-  const [questionType, setQuestionType] = useState<QuestionType>("MAQs");
-  const { questions, addQuestion, onSubmit } = useQuestion();
-  const topicContext = useTopic();
-
-  const questionDictionary: Dictionary = {
-    ...quizDictionary,
-    select: (props) => (
-      <SelectComponent  {...props} onSelect={setQuestionType} />
-    ),
-    "question-created": () => (
-      <ChoiceComponent questionType={questionType} />
-    ),
-  }
-
-  const onSubmitTopic = (values: any) => topicContext.addTopic(values);
-
-  const topicTab = <MasterForm formId={topicForm} schema={topicSchema} onSubmit={onSubmitTopic} dictionary={dictionary} />
-
-  const questionTab = <>
-    <div>
-      <Button onClick={addQuestion}>+</Button>
-    </div>
-    {questions.map((question, index) => <MasterForm componentDidMount={(context: UseFormReturn) => question.context = context}
-      onSubmit={() => {
-
-      }} formId={index.toString()} schema={questionSchema} dictionary={questionDictionary} />)}
-    <div>
-      <Button onClick={onSubmit}>Submit</Button>
-    </div>
-  </>
+  
+  const {quizTab, setQuizTab} = useTopic();
 
   const items: TabsProps['items'] = [
     {
-      key: '1',
+      key: QuizTab.TopicTab,
       label: 'Tab 1',
-      children: topicTab,
+      children: <TopicTab />,
     },
     {
-      key: '2',
+      key: QuizTab.QuestionTab,
       label: 'Tab 2',
-      children: questionTab,
+      children: null,
+      disabled: true
     }
   ];
 
   return <>
     <FormsProvider>
       <MainLayout>
-        <Tabs defaultActiveKey="1" items={items} />
+        <Tabs defaultActiveKey={QuizTab.TopicTab} items={items} onChange={(tab) => setQuizTab(tab as QuizTab)} activeKey={quizTab} />
       </MainLayout>
     </FormsProvider>
   </>

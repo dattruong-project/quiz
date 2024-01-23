@@ -1,8 +1,10 @@
 import { FormsProvider } from "dynamic-builder-form"
 import { LoginForm } from "./loginForm"
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
     return <FormsProvider>
         <LoginForm />
     </FormsProvider>
 }
+
+export default LoginScreen;

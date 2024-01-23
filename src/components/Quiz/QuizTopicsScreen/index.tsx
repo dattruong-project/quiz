@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { AppLogo } from '../../../config/icons'
 import { device } from '../../../styles/BreakPoints'
 import { PageCenter, CenterCardContainer, LogoContainer, HighlightedText } from '../../../styles/Global'
 import { ScreenTypes } from '../../../types'
@@ -83,9 +82,6 @@ const QuizTopicsScreen: React.FC = () => {
   return (
     <PageCenter light justifyCenter>
       <CenterCardContainer>
-        <LogoContainer>
-          {/* <AppLogo /> */}
-        </LogoContainer>
         <Heading>
           WELCOME TO <HighlightedText> LoreSumip</HighlightedText>
         </Heading>

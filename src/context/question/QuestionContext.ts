@@ -2,10 +2,11 @@ import { createContext, useContext} from 'react'
 import { QuestionContextTypes } from './QuestionContext.type'
 
 export const initialState: QuestionContextTypes = {
-    questions: [],
-    addQuestion: () => {},
-    removeQuestion:  () => {},
-    onSubmit: () => {}
+  questions: [],
+  addQuestion: () => { },
+  removeQuestion: () => { },
+  onSubmit: () => { },
+  generateQuestion: () => {}
 }
 
 export const QuestionContext = createContext<QuestionContextTypes>(initialState)

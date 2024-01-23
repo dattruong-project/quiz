@@ -1,5 +1,5 @@
 import { DictionaryComponentType, FormFields } from "dynamic-builder-form";
-import { topicId, levelId, totalScoreId, totalQuestionsId, totalTimeId } from "../constants";
+import { topicId, levelId, totalScoreId, totalQuestionsId, totalTimeId } from "../../../constants";
 
 const defaultLevel = [
     {

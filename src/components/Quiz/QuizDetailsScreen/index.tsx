@@ -1,16 +1,11 @@
 import styled from 'styled-components'
-import { AppLogo, StartIcon } from '../../../config/icons'
+import { StartIcon } from '../../../config/icons'
 import { PageCenter, CenterCardContainer, LogoContainer, HighlightedText } from '../../../styles/Global'
 import { ScreenTypes } from '../../../types'
 import { convertSeconds } from '../../../utils/helpers'
 import Button from '../../ui/Button'
 import { useTopic } from '../../../context/topic/TopicContext'
 
-const AppTitle = styled.h2`
-  font-weight: 700;
-  font-size: 32px;
-  color: ${({ theme }) => theme.colors.themeColor};
-`
 
 const DetailTextContainer = styled.div`
   font-size: 20px;
@@ -40,10 +35,7 @@ const QuizDetailsScreen = () => {
   return (
     <PageCenter light justifyCenter>
       <CenterCardContainer>
-        <LogoContainer>
-          {/* <AppLogo /> */}
-        </LogoContainer>
-        {/* <AppTitle>XEVEN QUIZ</AppTitle> */}
+        <LogoContainer/>
         <DetailTextContainer>
           <DetailText>
             Total questions to attempt:{' '}

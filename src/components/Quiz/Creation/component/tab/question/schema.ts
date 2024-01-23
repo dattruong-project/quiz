@@ -1,11 +1,12 @@
 import { FormSchema } from "dynamic-builder-form";
 import { QuestionFields } from "./fields";
-import { QuizSessions, quizSessionId } from "./sessions";
+import { QuizSessions } from "./sessions";
+import { questionSessionId } from "../../../constants";
 
 export const questionSchema: FormSchema = {
     fields: {...QuestionFields},
     sessions: {
-        [quizSessionId]: QuizSessions
+        [questionSessionId]: QuizSessions
     },
-    sessionsById: [quizSessionId],
+    sessionsById: [questionSessionId]
 }

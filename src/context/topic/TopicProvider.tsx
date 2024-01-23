@@ -3,6 +3,7 @@ import { Question, Result, Topic, quiz } from '../../data/QuizQuestions'
 import { TopicContext, initialState } from './TopicContext'
 import { ScreenTypes } from '../../types'
 import { TopicContextTypes } from './TopicContext.type'
+import { QuizTab } from '../../components/Quiz/Creation'
 
 type TopicProviderProps = {
   children: ReactNode
@@ -21,8 +22,8 @@ const QuizProvider = ({ children }: TopicProviderProps) => {
   const [topics, setTopics] = useState<Record<string, Topic>>(quiz);
   const selectTopic = (topic: string) => setQuizTopic(topic);
   const selectedTopicDetails = topics[selectedTopic];
-  const [currentAddedTopic, setCurrentAddedTopic] = useState("");
-
+  const [currentAddedTopic, setCurrentAddedTopic] = useState<Topic>();
+  const [quizTab, setQuizTab] = useState<QuizTab>(QuizTab.TopicTab);
 
   useEffect(() => {
     if (selectedTopicDetails) {
@@ -32,18 +33,23 @@ const QuizProvider = ({ children }: TopicProviderProps) => {
 
   const addTopic = (values: any) => {
     const { level, topic, totalScore, totalQuestions, totalTime, ...rest } = values;
-
-    const selectedLevel = level.find((item: any) => item.selected) ?? "Basic";
-
-    const updatedValues = { ...rest, topic: topic, level: selectedLevel, totalScore: Number(totalScore), totalQuestions: Number(totalQuestions), totalTime: Number(totalTime) };
-
-    // Update the topics state
-    setTopics((prevTopics) => {
-      const newTopic = { ...prevTopics, [topic]: updatedValues };
-      //trigger saved topic
-      setCurrentAddedTopic(topic);
-      return newTopic;
-    });
+    const selectedLevel = (level.find((item: any) => item.selected) ?? { selected: true }).selected;
+  
+    const updatedValues: Topic = {
+      ...rest,
+      topic,
+      level: selectedLevel,
+      totalScore: Number(totalScore),
+      totalQuestions: Number(totalQuestions),
+      totalTime: Number(totalTime),
+      questions: [],
+    };
+  
+    setTopics((prevTopics) => ({ ...prevTopics, [topic]: updatedValues }));
+    //trigger added topic
+    setCurrentAddedTopic(updatedValues);
+    ////set tab
+    setQuizTab(QuizTab.QuestionTab);
   };
 
   const addQuestionToTopic = (topic: string, questions: Question[]) => {
@@ -55,7 +61,7 @@ const QuizProvider = ({ children }: TopicProviderProps) => {
         }
       }
       return newTopics;
-    })
+    });
   }
 
   const quizContextValue: TopicContextTypes = {
@@ -73,7 +79,9 @@ const QuizProvider = ({ children }: TopicProviderProps) => {
     selectedTopicDetails,
     addTopic,
     addQuestionToTopic,
-    currentAddedTopic
+    currentAddedTopic,
+    setQuizTab,
+    quizTab
   }
 
   return <TopicContext.Provider value={quizContextValue}>{children}</TopicContext.Provider>

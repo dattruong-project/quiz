@@ -6,13 +6,7 @@ export const loginSession: FormSessions = {
         fieldsById: [usernameId, passwordId],
         id: loginSessionId,
         submit: {
-            label: 'Finish',
-        },
-        meta: {
-            tab: {
-                label: "Session 02",
-                disabled: true
-            }
+            label: "Login",
         }
     }
 }

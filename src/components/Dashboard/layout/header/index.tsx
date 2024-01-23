@@ -2,7 +2,8 @@ import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { Header } from "antd/es/layout/layout";
 
 const HeaderComponent = () => {
-
+   
+    //TODO:Header Navigation Bar
     const items: MenuProps['items'] = [
         {
             label: "Settings",
@@ -17,7 +18,9 @@ const HeaderComponent = () => {
         {
             label: 'Logout',
             key: 'Logout',
-            onClick: () => {}
+            onClick: () => {
+                console.log("Log out");
+            }
         },
     ];
 

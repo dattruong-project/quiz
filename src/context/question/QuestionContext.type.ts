@@ -8,6 +8,7 @@ export interface QuestionWithContext extends Question  {
 export type QuestionContextTypes = {
     questions: QuestionWithContext[];
     addQuestion: () => void,
+    generateQuestion: () => void,
     removeQuestion: (index: number) => void,
     onSubmit: (values: any) => void
 }
